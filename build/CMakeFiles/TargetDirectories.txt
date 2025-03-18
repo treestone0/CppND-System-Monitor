@@ -1,0 +1,3 @@
+/home/shuyan/ld_dev/CppND-System-Monitor/build/CMakeFiles/rebuild_cache.dir
+/home/shuyan/ld_dev/CppND-System-Monitor/build/CMakeFiles/edit_cache.dir
+/home/shuyan/ld_dev/CppND-System-Monitor/build/CMakeFiles/monitor.dir
