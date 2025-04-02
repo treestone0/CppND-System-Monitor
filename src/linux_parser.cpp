@@ -155,13 +155,13 @@ long LinuxParser::Jiffies() {
       linestream >> key >> userTime >> niceTime >> systemTime >> idleTime >>
           ioWait >> irq >> softIrq >> steal >> guest >> guestNice;
       if (key == "cpu") {
-        unsigned long long int idleAllTime = stoi(idleTime) + stoi(ioWait);
+        unsigned long long int idleAllTime = stoull(idleTime) + stoull(ioWait);
         unsigned long long int systemAllTime =
-            stoi(systemTime) + stoi(irq) + stoi(softIrq);
-        unsigned long long int virtAllTime = stoi(guest) + stoi(guestNice);
-        unsigned long long int totalTime = stoi(userTime) + stoi(niceTime) +
+            stoull(systemTime) + stoull(irq) + stoull(softIrq);
+        unsigned long long int virtAllTime = stoull(guest) + stoull(guestNice);
+        unsigned long long int totalTime = stoull(userTime) + stoull(niceTime) +
                                            systemAllTime + idleAllTime +
-                                           stoi(steal) + virtAllTime;
+                                           stoull(steal) + virtAllTime;
 
         return totalTime;
       }
@@ -197,10 +197,10 @@ long LinuxParser::ActiveJiffies(int pid) {
     return 0;
   }
 
-  auto utime = stoi(values[13]);
-  auto stime = stoi(values[14]);
-  auto cutime = stoi(values[15]);
-  auto cstime = stoi(values[16]);
+  auto utime = stoull(values[13]);
+  auto stime = stoull(values[14]);
+  auto cutime = stoull(values[15]);
+  auto cstime = stoull(values[16]);
 
   return utime + stime + cutime + cstime;
 }
@@ -228,13 +228,13 @@ long LinuxParser::ActiveJiffies() {
       linestream >> key >> userTime >> niceTime >> systemTime >> idleTime >>
           ioWait >> irq >> softIrq >> steal >> guest >> guestNice;
       if (key == "cpu") {
-        unsigned long long int idleAllTime = stoi(idleTime) + stoi(ioWait);
+        unsigned long long int idleAllTime = stoull(idleTime) + stoull(ioWait);
         unsigned long long int systemAllTime =
-            stoi(systemTime) + stoi(irq) + stoi(softIrq);
-        unsigned long long int virtAllTime = stoi(guest) + stoi(guestNice);
-        unsigned long long int totalTime = stoi(userTime) + stoi(niceTime) +
+            stoull(systemTime) + stoull(irq) + stoull(softIrq);
+        unsigned long long int virtAllTime = stoull(guest) + stoull(guestNice);
+        unsigned long long int totalTime = stoull(userTime) + stoull(niceTime) +
                                            systemAllTime + idleAllTime +
-                                           stoi(steal) + virtAllTime;
+                                           stoull(steal) + virtAllTime;
 
         return totalTime - idleAllTime;
       }
@@ -259,7 +259,7 @@ long LinuxParser::IdleJiffies() {
       linestream >> key >> temp >> temp >> temp >> idleTime >> ioWait >> temp >>
           temp >> temp >> temp >> temp;
       if (key == "cpu") {
-        unsigned long long int idleAllTime = stoi(idleTime) + stoi(ioWait);
+        unsigned long long int idleAllTime = stoull(idleTime) + stoull(ioWait);
         return idleAllTime;
       }
     }
